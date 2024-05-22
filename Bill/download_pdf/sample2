@@ -1,0 +1,147 @@
+<div class="container d-flex justify-content-center mt-50 mb-50">
+        <div class="row">
+            <div class="col-md-12 text-right mb-3">
+                <button class="btn btn-primary" id="download"> download pdf</button>
+            </div>
+            <div class="col-md-12">
+                <div class="card" id="invoice">
+                    <div>
+                        <h4 class="text-center" style="color:green">THE ORIGINALS FOR YOU</h4>
+                     </div>
+                    <div class="card-body">
+                            
+                        
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>products</th>
+                                  <th>Qty</th>
+                                  <th>Price</th>
+                                </tr>
+                             </thead> 
+                             <tbody>
+                                 <tr>
+                                    <td scope="column"></td>  
+                                    <td style="width:80% ">
+                                      <td>
+                                          <?php 
+                                             $sql = "SELECT id,product_name,qty,total_price FROM cart";
+                                             $query = mysqli_query($conn,$sql);
+                                             while($row = mysqli_fetch_assoc($query)){
+                                             ?>
+                                            
+                                          <tr>   
+                                            <td>
+                                               <?php echo $row['id']; ?> 
+                                            </td>
+                                            <td>
+                                                <?php echo $row['product_name']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['qty']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $row['total_price']; ?>
+                                            </td>
+                                          </tr>
+                                       </td>
+                                          <?php  }?>   
+                                    </td>                             
+                                 </tr>
+                             </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-7  mt-4" style="background-color:#f5f5f5;">
+                            <div class="p-4">
+                               <div class="text-center">
+                                  <h4>Receipt</h4>
+                               </div>
+                               <span class="mt-4"> Time : </span><span  class="mt-4" id="time"></span>
+                               <div class="row">
+                                  <div class="col-xs-6 col-sm-6 col-md-6 ">
+                                     <span id="day"></span> : <span id="year"></span>
+                                  </div>
+                               </div>
+                            </div>      
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                   <th> No.</th>
+                                   <th>Product Name</th>
+                                   <th>Quantity</th>
+                                   <th >Price</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                 <td>
+                                   <?php 
+                                   $grand_total=0;
+                                   $gtax=0;
+                                   ?>
+                                     <?php 
+                                         $sql = "SELECT id,product_name,qty,total_price FROM cart";
+                                         $query = mysqli_query($conn,$sql);
+                                         
+                                       
+                                         while($row = mysqli_fetch_assoc($query)){
+                                            $grand_total += $row['total_price'];
+                                            $gtax=$grand_total*((100+5)/100);
+                                         ?>
+                                 <tr>
+                                   <td> <?php echo $row['id']; ?> </td>      
+                                   <td> <?php echo $row['product_name']; ?> </td>
+                                   <td><?php echo $row['qty']; ?> </td>
+                                   <td> <?php echo $row['total_price']; ?> </td><br><br> <?php  }?> 
+                                 </tr>
+                                 </td> 
+                               
+                                
+                                   <td class="text-right text-dark" >
+                                        <h5><strong>Sub Total:  ₹ <?php echo number_format($grand_total,2) ?>  </strong></h5>
+                                        <p><strong>Tax (5%) : ₹ <?php echo number_format($gtax,2) ?></strong></p>
+                                   </td> 
+                                   <td class="text-center text-dark" >
+                                      <h5> <strong><span id="subTotal"></strong></h5>
+                                      <h5> <strong><span id="taxAmount"></strong></h5>
+                                   </td>  
+                                </tr>
+                            </tbody>
+                            <tr>
+                                <td>  
+                                   <td>  </td>
+                                   <td>  </td>
+                                   <td>  </td>  
+                                   
+                                   <td class="text-right text-dark">
+                                
+                                      <h5 > <strong>Gross Total: ₹ <?php echo number_format($gtax,2) ?></strong>  </h5> 
+                                   </td>
+                                   <td class="text-center text-danger">
+                                      <h5 id="totalPayment"><strong> </strong></h5>
+                                      
+                                   </td>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            
+
+                    <div class="card-footer"> <span class="text-muted">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                            fugiat nulla pariatur.Duis aute irure dolor in reprehenderit</span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
